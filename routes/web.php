@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('profileAdmin',[UserController::class,'personalAdmin'])->name('personal');
+    Route::get('userData',[UserController::class,'userData'])->name('user-data');
+    Route::get('teknisi',[UserController::class,'teknisi'])->name('teknisi');
+    Route::get('transaksi',[TransaksiController::class,'index'])->name('transaksi');
+});
