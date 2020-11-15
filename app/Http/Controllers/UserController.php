@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,7 +26,37 @@ class UserController extends Controller
 
     public function teknisi()
     {
-        return view('teknisi.index');
+        
+        $data['users']=User::all();
+        return view('teknisi.index',$data);
+    }
+
+    public function teknisi_add ()
+    {
+        return view('teknisi.add');
+    }
+    public function teknisi_store (Request $request)
+    {
+        // dd($request);
+        $validatedData = $request->validate([
+            'first_name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'kode_pos' => 'required',
+        ]);
+
+        $user=new User();
+        $user->name=$request->first_name." ".$request->last_name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->role=$request->role;
+        $user->city=$request->city;
+        $user->kode_pos=$request->kode_pos;
+        $user->save();
+        return redirect()->route('teknisi');
     }
 
     //function to split name

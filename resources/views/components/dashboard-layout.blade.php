@@ -45,13 +45,13 @@ The above copyright notice and this permission notice shall be included in all c
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="{{request()->is('dashboard') ? 'active' : '' }} nav-item ">
+          <li class="{{request()->is('dashboard') ? 'active' : '' }} nav-item " style="{{$role=='kasir' ? 'display:none;' : 'display:block;'}}">
             <a class="nav-link" href="{{ route('dashboard') }}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="{{request()->is('userData') ? 'active' : '' }} nav-item ">
+          <li class="{{request()->is('userData') ? 'active' : '' }} nav-item " style="{{$role=='kasir'||$role=='teknisi' ? 'display:none;' : 'display:block;'}}">
             <a class="nav-link" href="{{ route('user-data') }}">
               <i class="material-icons">person</i>
               <p>Data User</p>
@@ -63,7 +63,7 @@ The above copyright notice and this permission notice shall be included in all c
               <p>Data Transaksi</p>
             </a>
           </li>
-          <li class="{{request()->is('teknisi') ? 'active' : '' }} nav-item ">
+          <li class="{{request()->is('teknisi') ? 'active' : '' }} nav-item " style="{{$role=='kasir' ? 'display:none;' : 'display:block;'}}">
             <a class="nav-link" href="{{ route('teknisi') }}">
               <i class="material-icons">library_books</i>
               <p>Data Teknisi</p>

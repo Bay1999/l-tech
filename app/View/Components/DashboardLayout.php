@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class DashboardLayout extends Component
@@ -23,6 +24,7 @@ class DashboardLayout extends Component
      */
     public function render()
     {
-        return view('components.dashboard-layout');
+        $role=Auth::user()->role;
+        return view('components.dashboard-layout',['role'=>$role]);
     }
 }
