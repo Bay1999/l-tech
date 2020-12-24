@@ -57,18 +57,22 @@ The above copyright notice and this permission notice shall be included in all c
               <p>Data User</p>
             </a>
           </li>
-          <li class="{{request()->is('transaksi') ? 'active' : '' }} nav-item ">
-            <a class="nav-link" href="{{ route('transaksi') }}">
+          <li class="{{request()->is('transaksi/') ? 'active' : '' }} nav-item">
+            <a class="nav-link collapse" href="#transaksi" data-toggle="collapse" aria-expanded="false" aria-controls="transaksi">
               <i class="material-icons">content_paste</i>
               <p>Data Transaksi</p>
             </a>
+            <div class="collapse multi-collapse ml-5" id="transaksi">
+              <a class="nav-link" href="{{ route('transaksi', ['jenis' => 'masuk']) }}">Servis Masuk </a>
+              <a class="nav-link" href="{{ route('transaksi', ['jenis' => 'keluar']) }}">Servis Keluar</a>
+            </div>
           </li>
           <li class="{{request()->is('teknisi') ? 'active' : '' }} nav-item " style="{{$role=='kasir' ? 'display:none;' : 'display:block;'}}">
             <a class="nav-link" href="{{ route('teknisi') }}">
               <i class="material-icons">library_books</i>
               <p>Data Teknisi</p>
             </a>
-          {{-- <li class="nav-item active-pro ">
+            {{-- <li class="nav-item active-pro ">
             <a class="nav-link" href="./upgrade.html">
               
               <i class="material-icons">person</i>
@@ -136,12 +140,11 @@ The above copyright notice and this permission notice shall be included in all c
                   <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                        {{ __('Logout') }}
+                      {{ __('Logout') }}
                     </a>
-                </form>
+                  </form>
                 </div>
               </li>
             </ul>

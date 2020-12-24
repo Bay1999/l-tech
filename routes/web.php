@@ -21,17 +21,17 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    if(Auth::user()->role=='kasir'){
+    if (Auth::user()->role == 'kasir') {
         return redirect()->route('transaksi');
     }
     return view('dashboard');
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('profileAdmin',[UserController::class,'personalAdmin'])->name('personal');
-    Route::get('userData',[UserController::class,'userData'])->name('user-data');
-    Route::get('teknisi',[UserController::class,'teknisi'])->name('teknisi');
-    Route::get('teknisi-add',[UserController::class,'teknisi_add'])->name('add-teknisi');
-    Route::post('teknisi-store',[UserController::class,'teknisi_store'])->name('store-admin');
-    Route::get('transaksi',[TransaksiController::class,'index'])->name('transaksi');
+    Route::get('profileAdmin', [UserController::class, 'personalAdmin'])->name('personal');
+    Route::get('userData', [UserController::class, 'userData'])->name('user-data');
+    Route::get('teknisi', [UserController::class, 'teknisi'])->name('teknisi');
+    Route::get('teknisi-add', [UserController::class, 'teknisi_add'])->name('add-teknisi');
+    Route::post('teknisi-store', [UserController::class, 'teknisi_store'])->name('store-admin');
+    Route::get('transaksi/{jenis}', [TransaksiController::class, 'index'])->name('transaksi');
 });
